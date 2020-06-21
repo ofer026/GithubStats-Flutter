@@ -10,25 +10,24 @@ class Users extends ChangeNotifier {
 
 
   findGithubUsers(String username) async {
-    print('hello');
     var response = (await findUsers(username));
     print(response);
-    print('hey');
     var userName = response['login'];
-    print('heyy');
     var followersURL = response['followers_url'];
     var followersCount = (await getFollowers(followersURL)).length;
     var reposURL = response['repos_url'];
     var reposCount = (await getRepos(reposURL)).length;
+    var location = response['location'];
     //var followersCount = 0;
     //var reposCount = 0;
-    print(userName);
-    print(avatar_url);
-    print(followersCount);
-    print(reposCount);
+    //print(userName);
+    //print(avatar_url);
+    //print(followersCount);
+    //print(reposCount);
     _avatar_url = response['avatar_url'];
     _users['users'].add({'username': userName, 'avatar_url': avatar_url,
-      'followers': followersCount, 'repos': reposCount});
+      'followers': followersCount, 'repos': reposCount,
+       'location': location});
     print(response);
     notifyListeners();
   }
